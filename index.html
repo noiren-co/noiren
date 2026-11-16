@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIREN</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.logo {
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 8px;
+    font-weight: 600;
+}
+
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 22px;
+    text-align: center;
+}
+
+.number {
+    font-size: clamp(28px, 6vw, 65px);
+    font-weight: 300;
+}
+
+.unit {
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="logo">NOIREN</div>
+
+<div class="countdown">
+    <div>
+        <div class="number" id="days">00</div>
+        <div class="unit">GÜN</div>
+    </div>
+    <div>
+        <div class="number" id="hours">00</div>
+        <div class="unit">SAAT</div>
+    </div>
+    <div>
+        <div class="number" id="minutes">00</div>
+        <div class="unit">DAKİKA</div>
+    </div>
+    <div>
+        <div class="number" id="seconds">00</div>
+        <div class="unit">SANİYE</div>
+    </div>
+</div>
+
+<script>
+const target = new Date("2026-12-18T23:59:00+03:00").getTime();
+
+function updateCountdown() {
+    const now = Date.now();
+    const distance = Math.max(0, target - now);
+
+    document.getElementById("days").textContent =
+        Math.floor(distance / 86400000).toString().padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+        Math.floor((distance % 86400000) / 3600000).toString().padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+        Math.floor((distance % 3600000) / 60000).toString().padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        Math.floor((distance % 60000) / 1000).toString().padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
