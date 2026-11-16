@@ -18,6 +18,7 @@ body {
     color: #fff;
     min-height: 100vh;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 .logo {
@@ -25,9 +26,11 @@ body {
     top: 35px;
     width: 100%;
     text-align: center;
-    font-size: 24px;
-    letter-spacing: 8px;
-    font-weight: 600;
+    font-family: "Bodoni MT", "Didot", "Times New Roman", serif;
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 5px;
 }
 
 .countdown {
@@ -36,13 +39,17 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    gap: 22px;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(10px, 3vw, 30px);
+    width: 95%;
     text-align: center;
 }
 
 .number {
     font-size: clamp(28px, 6vw, 65px);
     font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .unit {
@@ -52,6 +59,16 @@ body {
     margin-top: 10px;
 }
 
+@media (max-width: 450px) {
+    .countdown {
+        gap: 12px;
+    }
+
+    .unit {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+}
 </style>
 </head>
 
@@ -60,28 +77,34 @@ body {
 <div class="logo">NOIREN</div>
 
 <div class="countdown">
+
     <div>
         <div class="number" id="days">00</div>
         <div class="unit">GÜN</div>
     </div>
+
     <div>
         <div class="number" id="hours">00</div>
         <div class="unit">SAAT</div>
     </div>
+
     <div>
         <div class="number" id="minutes">00</div>
         <div class="unit">DAKİKA</div>
     </div>
+
     <div>
         <div class="number" id="seconds">00</div>
         <div class="unit">SANİYE</div>
     </div>
+
 </div>
 
 <script>
 const target = new Date("2026-12-18T23:59:00+03:00").getTime();
 
 function updateCountdown() {
+
     const now = Date.now();
     const distance = Math.max(0, target - now);
 
